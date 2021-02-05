@@ -15,6 +15,7 @@
 
             window.widgetNorwegian = new WeatherApp("widget_2", {
                 lang: "no",
+                celsius: false,
                 location:{ latitude: 59.91615978828108, longitude: 10.750810000102513 },
             });
 
@@ -28,15 +29,19 @@
     <main class="content">
         <section>
             <h2>Static PT</h2>
+
             <div id="widget_1" class="widget">
-                <div class="widget__bg" style="background-image: url('http://openweathermap.org/img/wn/10d@2x.png');"></div>
+                <div class="widget__bg"></div>
+
                 <div class="widget__content">
                     <p class="widget__location">
                         <output class="widget__country">Country</output> / <output class="widget__city">City</output>
                     </p>
+
                     <p class="widget__meteo" >
                         <output class="widget__temp">0</output><output class="widget__unit">&ordm;C</output>
                     </p>
+
                     <p class="widget__bar">
                         <button type="submit" class="widget__synchBtn"><span>↺</span></button>
                         <button type="submit" class="widget__unitBtn">Fahrenheit</button>
@@ -53,18 +58,22 @@
 
         <section>
             <h2>Static NO</h2>
+
             <div id="widget_2" class="widget">
-                <div class="widget__bg" style="background-image: url('http://openweathermap.org/img/wn/10d@2x.png');"></div>
+                <div class="widget__bg"></div>
+
                 <div class="widget__content">
                     <p class="widget__location">
                         <output class="widget__country">Country</output> / <output class="widget__city">City</output>
                     </p>
+
                     <p class="widget__meteo" >
                         <output class="widget__temp">0</output><output class="widget__unit">&ordm;C</output>
                     </p>
+
                     <p class="widget__bar">
                         <button type="submit" class="widget__synchBtn"><span>↺</span></button>
-                        <button type="submit" class="widget__unitBtn">Fahrenheit</button>    
+                        <button type="submit" class="widget__unitBtn">Fahrenheit</button>
                         <span class="widget__suncycle">☀ <output class="widget__sunrise">0</output> ☽ <output class="widget__sunset">0</output></span>
                         <span class="widget__wind">
                             <output class="widget__windSpeed">0 m/s</output>
@@ -77,15 +86,19 @@
 
         <section>
             <h2>apiGeo</h2>
+
             <div id="widget_3" class="widget">
-                <div class="widget__bg" style="background-image: url('http://openweathermap.org/img/wn/10d@2x.png');"></div>
+                <div class="widget__bg"></div>
+
                 <div class="widget__content">
                     <p class="widget__location">
                         <output class="widget__country">Country</output> / <output class="widget__city">City</output>
                     </p>
+
                     <p class="widget__meteo" >
                         <output class="widget__temp">0</output><output class="widget__unit">&ordm;C</output>
                     </p>
+
                     <p class="widget__bar">
                         <button type="submit" class="widget__synchBtn"><span>↺</span></button>
                         <button type="submit" class="widget__unitBtn">Fahrenheit</button>

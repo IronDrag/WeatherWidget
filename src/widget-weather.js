@@ -1,8 +1,7 @@
 class WeatherApp {
   constructor(id, props = {}) {
     this._key = '64d01fd4bf8aeb877b07499277fb5522';
-    this._APIs = { weather: 'https://api.openweathermap.org/data/2.5/weather', location: 'https://api.bigdatacloud.net/data/reverse-geocode-client' };
-    this._staticGeo = !!props.location;
+    this._APIs = { weather: 'https://api.openweathermap.org/data/2.5/weather', location: 'https://api.bigdatacloud.net/data/reverse-geocode-client' }; // this._staticGeo = !!props.location;
 
     this.rootEl = document.getElementById(id);
 
@@ -20,19 +19,15 @@ class WeatherApp {
     };
 
     this.initViews();
-    if (!this._staticGeo) {
+    if (!props.location) { // if (!this._staticGeo) {
       new Promise((resolve, reject) => { navigator.geolocation.getCurrentPosition(resolve, reject); })
-        .then((dataPos) => {
-          this.props.location = dataPos.coords; this.render();
+        .then((dataPos) => { // Spread ...dataPos.coords don't work, propetries is prototype or non-enumerable
+          this.props.location = { ...this.props.location, latitude: dataPos.coords.latitude, longitude: dataPos.coords.longitude }; this.synch(); /* this.render(); */
         });
     }
-    this.render();
-    this.initListners(); // this.setSynch();
-  }
 
-  render() {
-    this.getLocation().then(() => { this.viewLocation(); });
-    this.getWeather().then(() => { this.viewWeather(); });
+    /* this.render(); */ this.synch(); setInterval(() => { this.synch(); }, 60000);
+    this.initListners();
   }
 
   initViews() {
@@ -53,16 +48,13 @@ class WeatherApp {
   }
 
   getData(uri) {
-    return fetch(uri).then((data) => data.json());
+    return fetch(uri).then((data) => { if (!data.ok) throw new Error('Whoops!'); return data.json(); });
   }
 
   setUnit() {
-    this.props.celsius = !this.props.celsius;
     this.views.unitBtn.textContent = this.props.celsius ? 'Fahrenheit' : 'Celsius';
     this.views.unit.textContent = this.props.celsius ? 'ºC' : 'ºF';
   }
-
-  setSynch() { setInterval(() => { this.getWeather(); }, 10000); }
 
   viewWeather() { // set Weather view
     const dW = this.props.location;
@@ -75,7 +67,7 @@ class WeatherApp {
     v.sunrise.textContent = `${sunrize.getHours()}:${sunrize.getMinutes()}`;
     v.sunset.textContent = `${sunset.getHours()}:${sunset.getMinutes()}`;
 
-    v.bg.style.backgroundImage = `url('http://openweathermap.org/img/wn/${dW.weather[0].icon}@2x.png')`;
+    setTimeout(() => { v.bg.style.backgroundImage = `url('http://openweathermap.org/img/wn/${dW.weather[0].icon}@2x.png')`; }, 1000);
     v.windDir.style.transform = `rotate(${dW.wind.deg}deg)`;
     this.rootEl.classList.toggle('widget_hot', ((dW.main.temp > 0) && this.props.celsius) || dW.main.temp > 32);
   }
@@ -86,20 +78,22 @@ class WeatherApp {
   }
 
   synch() {
-    this.views.synchBtn.children[0].classList.add('reload');
-    setTimeout(() => { this.views.synchBtn.children[0].classList.remove('reload'); }, 2000);
-    this.render();
+    this.views.synchBtn.firstChild.classList.add('reload'); this.views.bg.style.backgroundImage = 'url(widget-loading.gif)';
+    setTimeout(() => { this.views.synchBtn.firstChild.classList.remove('reload'); }, 2000);
+    this.setUnit();
+    this.getLocation().then(() => { this.viewLocation(); }); // Banned my test client-side adress
+    this.getWeather().then(() => { this.viewWeather(); });
   }
 
   tost() {
-    this.setUnit();
+    this.props.celsius = !this.props.celsius; this.setUnit();
     this.getWeather().then(() => { this.viewWeather(); });
   }
 
   initListners() {
     this.views.unit.addEventListener('click', () => { this.tost(); });
-    this.views.unitBtn.addEventListener('click', () => { this.tost(); });
-    this.views.synchBtn.addEventListener('click', () => { this.synch(); });
+    this.views.unitBtn.addEventListener('click', this.tost.bind(this)); // Experiment
+    this.views.synchBtn.addEventListener('click', this.synch.bind(this)); // Experiment
     this.views.temp.addEventListener('click', () => { this.synch(); });
   }
 }

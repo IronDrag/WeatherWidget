@@ -15,9 +15,11 @@
             "code": 150,
             "ignoreUrls": true,
             "ignoreStrings": true,
-            "ignoreTemplateLiterals": true
+            "ignoreTemplateLiterals": true,
+            "ignoreComments": true
             }],
         "no-unused-vars" : "off",
-        "no-underscore-dangle" : "off"
+        "no-underscore-dangle" : "off",
+        "linebreak-style": ["error", "windows"]
     }
 }
