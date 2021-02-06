@@ -6,9 +6,7 @@ class WeatherApp {
 
     this.rootEl = document.getElementById(id);
 
-    this.views = [
-      'country', 'city', 'temp', 'unit', 'unitBtn', 'synchBtn', 'synchBtn', 'windDir', 'bg', 'windSpeed', 'sunrise', 'sunset',
-    ];
+    this.views = ['country', 'city', 'temp', 'unit', 'unitBtn', 'synchBtn', 'synchBtn', 'windDir', 'bg', 'windSpeed', 'sunrise', 'sunset'];
 
     this.props = {
       lang: navigator.language.slice(0, 2),
@@ -27,7 +25,7 @@ class WeatherApp {
         });
     }
 
-    this.synch(); setInterval(() => { this.synch(); }, 60000);
+    this.synch();
     this.initListners();
   }
 
@@ -83,6 +81,7 @@ class WeatherApp {
     this.setUnit();
     // this.getLocation().then(() => { this.viewLocation(); });
     this.getWeather().then(() => { this.viewWeather(); });
+    setTimeout(() => { this.synch(); }, 60000);
   }
 
   synchTemperature() {
