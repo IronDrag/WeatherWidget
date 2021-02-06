@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 class WeatherApp {
   constructor(id, props = {}) {
     WeatherApp._key = '64d01fd4bf8aeb877b07499277fb5522';
@@ -31,10 +32,9 @@ class WeatherApp {
   }
 
   initViews() {
-    const buf = {};
-    this.views.forEach((el) => {
-      buf[el] = this.rootEl.querySelector(`.widget__${el}`);
-    }); this.views = buf;
+    this.views = this.views.reduce((views, nameView) => {
+      views[nameView] = this.rootEl.querySelector(`.widget__${nameView}`); return views;
+    }, {});
   }
 
   async getWeather() {
@@ -60,16 +60,16 @@ class WeatherApp {
     const dW = this.props.location;
     const sunrize = new Date(dW.sys.sunrise * 1000);
     const sunset = new Date(dW.sys.sunset * 1000);
-    const v = this.views;
+    const { views } = this;
 
-    v.temp.textContent = dW.main.temp;
-    v.windSpeed.textContent = `${dW.wind.speed} m/s`;
-    v.sunrise.textContent = `${sunrize.getHours()}:${sunrize.getMinutes()}`;
-    v.sunset.textContent = `${sunset.getHours()}:${sunset.getMinutes()}`;
+    views.temp.textContent = dW.main.temp;
+    views.windSpeed.textContent = `${dW.wind.speed} m/s`;
+    views.sunrise.textContent = `${sunrize.getHours()}:${sunrize.getMinutes()}`;
+    views.sunset.textContent = `${sunset.getHours()}:${sunset.getMinutes()}`;
 
-    setTimeout(() => { v.bg.style.backgroundImage = `url('http://openweathermap.org/img/wn/${dW.weather[0].icon}@2x.png')`; }, 1000);
-    setTimeout(() => { this.views.synchBtn.firstChild.classList.remove('reload'); }, 2000);
-    v.windDir.style.transform = `rotate(${dW.wind.deg}deg)`;
+    setTimeout(() => { views.bg.style.backgroundImage = `url('http://openweathermap.org/img/wn/${dW.weather[0].icon}@2x.png')`; }, 1000);
+    setTimeout(() => { views.synchBtn.firstChild.classList.remove('reload'); }, 2000);
+    views.windDir.style.transform = `rotate(${dW.wind.deg}deg)`;
     this.rootEl.classList.toggle('widget_hot', ((dW.main.temp > 0) && this.props.celsius) || dW.main.temp > 32);
   }
 
@@ -81,7 +81,7 @@ class WeatherApp {
   synch() {
     this.views.synchBtn.firstChild.classList.add('reload'); this.views.bg.style.backgroundImage = 'url(widget-loading.gif)';
     this.setUnit();
-    this.getLocation().then(() => { this.viewLocation(); });
+    // this.getLocation().then(() => { this.viewLocation(); });
     this.getWeather().then(() => { this.viewWeather(); });
   }
 
