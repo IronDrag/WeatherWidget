@@ -26,7 +26,7 @@ class WeatherApp {
     }
 
     this.synch();
-    this.initListners();
+    this.initListeners();
   }
 
   initViews() {
@@ -78,9 +78,8 @@ class WeatherApp {
 
   synch() {
     this.views.synchBtn.firstChild.classList.add('reload'); this.views.bg.style.backgroundImage = 'url(widget-loading.gif)';
-    this.setUnit();
     // this.getLocation().then(() => { this.viewLocation(); });
-    this.getWeather().then(() => { this.viewWeather(); });
+    this.getWeather().then(() => { this.viewWeather(); this.setUnit(); });
     setTimeout(() => { this.synch(); }, 60000);
   }
 
@@ -89,7 +88,7 @@ class WeatherApp {
     this.getWeather().then(() => { this.viewWeather(); });
   }
 
-  initListners() {
+  initListeners() {
     this.views.unit.addEventListener('click', () => { this.synchTemperature(); });
     this.views.unitBtn.addEventListener('click', this.synchTemperature.bind(this)); // Experiment
     this.views.synchBtn.addEventListener('click', this.synch.bind(this)); // Experiment
