@@ -21,8 +21,7 @@ Weather geolocation api widget
 ## Technical details:
 * HTML5
 * CSS3, BEM
-* JS, ES6+ ( Promise, Fetch, Spread, Async, Class, Arrow function )
-* 100 Lines code :)
+* JS, ES6+ ( Promise, Fetch, Rest, Spread, Async, Class, Arrow function )
 * API: OpenWeather, BigDatacloud
 
 [idragon.space](https://idragon.space)
