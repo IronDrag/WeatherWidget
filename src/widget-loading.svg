@@ -1,0 +1,19 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+    
+    <path 
+        id="outer"
+        d="M184.454 99.9999C184.454 146.642 146.642 184.453 100 184.453M15.5469 99.9999C15.5469 53.3577 53.3579 15.5466 100 15.5466" 
+        stroke="#1976A1" 
+        stroke-width="10" 
+        stroke-linecap="round"/>
+    
+    <path 
+        id="inner"
+        d="M169.751 99.9999C169.751 61.4774 138.522 30.2488 99.9999 30.2488M99.9999 169.751C61.4774 169.751 30.2488 138.522 30.2488 99.9999" 
+        stroke="#C4ECF1" 
+        stroke-width="10" 
+        stroke-linecap="round"/>
+        
+    <animateTransform xlink:href="#outer" id="animOuter" attributeName="transform" attributeType="XML" type="rotate" from="0 100 100" to="360 100 100" dur="2s" additive="sum" repeatCount="indefinite"/>
+    <animateTransform xlink:href="#inner" id="animInner" attributeName="transform" attributeType="XML" type="rotate" from="0 100 100" to="-360 100 100" dur="2s" additive="sum" repeatCount="indefinite"/>
+</svg>

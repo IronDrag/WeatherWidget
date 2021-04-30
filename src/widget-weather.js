@@ -77,7 +77,7 @@ class WeatherApp {
   }
 
   synch() {
-    this.views.synchBtn.firstChild.classList.add('reload'); this.views.bg.style.backgroundImage = 'url(widget-loading.gif)';
+    this.views.synchBtn.firstChild.classList.add('reload'); this.views.bg.style.backgroundImage = 'url(widget-loading.svg)';
     this.getLocation().then(() => { this.viewLocation(); });
     this.getWeather().then(() => { this.viewWeather(); this.setUnit(); });
     setTimeout(() => { this.synch(); }, 60000);
