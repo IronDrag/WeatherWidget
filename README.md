@@ -4,9 +4,9 @@ Weather geolocation api widget
 
 > ⚙️ Turn on "**geolocation**" in  your browser for get <ins>current location and weather</ins>
 
-[![Demo](https://idragon.space/WeatherWidget/images/button_demo.png)](https://idragon.space/WeatherWidget)
+[![Demo](https://irondrag.github.io/WeatherWidget/images/button_demo.png)](https://irondrag.github.io/WeatherWidget)
 
-![Preview "WeatherWidget" project](https://idragon.space/WeatherWidget/images/prev.png)
+![Preview "WeatherWidget" project](https://irondrag.github.io/WeatherWidget/images/preview-social.png)
 
 ## Summary:
 * Pretify **colored design**
@@ -24,7 +24,7 @@ Weather geolocation api widget
 * JS, ES6+ ( Promise, Fetch, Rest, Spread, Async, Class, Arrow function )
 * API: OpenWeather, BigDatacloud
 
-[idragon.space](https://idragon.space)
+[idragon.space](https://irondrag.github.io)
 
 [info.irondragon@gmail.com](mailto:info.irondragon@gmail.com)
 
